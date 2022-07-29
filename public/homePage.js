@@ -4,14 +4,14 @@ const logoutBtn = new LogoutButton();
 
 logoutBtn.action = function() {
     ApiConnector.logout(response => {
-        if(response.success) {
-            location.reload(); 
+        if (response.success) {
+            location.reload();
         }
-    })
+    });
 }
 
 ApiConnector.current(response => {
-    if(response.success) {
+    if (response.success) {
         ProfileWidget.showProfile(response.data);
     }
 });
@@ -20,7 +20,7 @@ const ratesBoard = new RatesBoard();
 
 ratesBoard.exchangeRate = function() {
     ApiConnector.getStocks(response => {
-        if(response.success) {
+        if (response.success) {
             this.clearTable();
             this.fillTable(response.data);
         }
@@ -35,7 +35,7 @@ moneyManager.addMoneyCallback = function(data) {
     let currency = data.currency;
     let amount = data.amount;
     ApiConnector.addMoney({ currency, amount }, response => {
-        if(response.success) {
+        if (response.success) {
             ProfileWidget.showProfile(response.data);
             this.setMessage(true, 'Баланс пополнен!');
         } else {
@@ -50,7 +50,7 @@ moneyManager.conversionMoneyCallback = function(data) {
     let fromAmount = data.fromAmount;
 
     ApiConnector.convertMoney({ fromCurrency, targetCurrency, fromAmount }, response => {
-        if(response.success) {
+        if (response.success) {
             ProfileWidget.showProfile(response.data);
             this.setMessage(true, 'Конвертирование успешно!');
         } else {
@@ -64,9 +64,9 @@ moneyManager.sendMoneyCallback = function(data) {
     let currency = data.currency;
     let amount = data.amount;
     ApiConnector.transferMoney({ to, currency, amount }, response => {
-        if(response.success) {
+        if (response.success) {
             ProfileWidget.showProfile(response.data);
-            this.setMessage(true, 'Перевод успешен!'); 
+            this.setMessage(true, 'Перевод успешен!');
         } else {
             this.setMessage(false, 'Перевод не был выполнен! (Проверьте введенный вами данные)');
         }
@@ -76,7 +76,7 @@ moneyManager.sendMoneyCallback = function(data) {
 const favoritesWidget = new FavoritesWidget();
 
 ApiConnector.getFavorites(response => {
-    if(response.success) {
+    if (response.success) {
         this.clearTable();
         this.fillTable(response.data);
     }
