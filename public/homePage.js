@@ -109,7 +109,7 @@ favoritesWidget.removeUserCallback = function(data) {
         if (response.success) {
             this.clearTable();
             this.fillTable(response.data);
-            this.setMessage(true, 'Пользователь успешно удален!');
+            this.setMessage(true, 'Пользователь успешно удалён!');
         } else {
             this.setMessage(false, response.error);
         }
