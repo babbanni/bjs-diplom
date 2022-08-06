@@ -80,8 +80,10 @@ favoritesWidget.getFavoritesCallback = function() {
         if (response.success) {
             this.clearTable();
             this.fillTable(response.data);
+            moneyManager.updateUsersList(response.data);
+            this.setMessage(true, 'Пользователь успешно добавлен');
         } else {
-            this.updateUsersList(response.data);
+            this.setMessage(false, response.error);
         }
 
     });
@@ -104,8 +106,7 @@ favoritesWidget.addUserCallback = function(data) {
 }
 
 favoritesWidget.removeUserCallback = function(data) {
-    let id = data.id;
-    ApiConnector.removeUserFromFavorites(id, response => {
+    ApiConnector.removeUserFromFavorites(data, response => {
         if (response.success) {
             this.clearTable();
             this.fillTable(response.data);
